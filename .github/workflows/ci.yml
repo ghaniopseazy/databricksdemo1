@@ -22,3 +22,12 @@ jobs:
           test -f notebooks/03_Silver_to_Gold.ipynb
           test -f notebooks/04_Data_Quality.ipynb
           echo "Project validation passed"
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+      - name: Check Databricks CLI
+        run: |
+          databricks version
+      - name: Validate Databricks Bundle
+        run: |
+          databricks bundle validate -t dev
+          
