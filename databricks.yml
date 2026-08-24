@@ -1,0 +1,12 @@
+bundle:
+  name: simple-retail-demo
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405609380800067.7.azuredatabricks.net/

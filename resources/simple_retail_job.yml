@@ -1,0 +1,36 @@
+resources:
+  jobs:
+    simple_retail_demo_job:
+      name: simple-retail-demo
+
+      tasks:
+        - task_key: bronze
+          existing_cluster_id: "0818-015456-e1dcpmzm"
+          notebook_task:
+            notebook_path: ../notebooks/01_Raw_to_Bronze.ipynb
+
+        - task_key: silver
+          depends_on:
+            - task_key: bronze
+          existing_cluster_id: "0818-015456-e1dcpmzm"
+          notebook_task:
+            notebook_path: ../notebooks/02_Bronze_to_Silver.ipynb
+
+        - task_key: data_quality
+          depends_on:
+            - task_key: silver
+          existing_cluster_id: "0818-015456-e1dcpmzm"
+          notebook_task:
+            notebook_path: ../notebooks/04_Data_Quality.ipynb
+
+        - task_key: gold
+          depends_on:
+            - task_key: data_quality
+          existing_cluster_id: "0818-015456-e1dcpmzm"
+          notebook_task:
+            notebook_path: ../notebooks/03_Silver_to_Gold.ipynb
+
+      schedule:
+        quartz_cron_expression: "0 0 8 * * ?"
+        timezone_id: "Asia/Kolkata"
+        pause_status: UNPAUSED

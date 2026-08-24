@@ -1,0 +1,9 @@
+.databricks/
+.bundle/
+*.pem
+*.key
+.env
+.env.*
+secrets/
+__pycache__/
+*.pyc

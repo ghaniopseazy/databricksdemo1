@@ -1,0 +1,24 @@
+name: Databricks CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate project files
+        run: |
+          test -f databricks.yml
+          test -f resources/simple_retail_job.yml
+          test -f notebooks/01_Raw_to_Bronze.ipynb
+          test -f notebooks/02_Bronze_to_Silver.ipynb
+          test -f notebooks/03_Silver_to_Gold.ipynb
+          test -f notebooks/04_Data_Quality.ipynb
+          echo "Project validation passed"
