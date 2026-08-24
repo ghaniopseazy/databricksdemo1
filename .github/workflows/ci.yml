@@ -2,9 +2,11 @@ name: Databricks CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+     - main
   pull_request:
-    branches: [ main ]
+    branches:
+     - main
 
 jobs:
   validate:
@@ -12,7 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Validate project files
         run: |
           test -f databricks.yml
@@ -22,3 +23,11 @@ jobs:
           test -f notebooks/03_Silver_to_Gold.ipynb
           test -f notebooks/04_Data_Quality.ipynb
           echo "Project validation passed"
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+      - name: Check Databricks CLI
+        run: |
+          databricks version
+      - name: Validate Databricks Bundle
+        run: |
+          databricks bundle validate -t dev
