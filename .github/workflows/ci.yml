@@ -1,4 +1,4 @@
-name: Databricks CI
+name: Databricks CI-cd
 
 on:
   push:
