@@ -7,10 +7,17 @@ on:
   pull_request:
     branches:
      - main
-
+  permissions:
+    id-token: write
+    contents: read
 jobs:
   validate:
     runs-on: ubuntu-latest
+    environment: dev
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{vars.DATABRICKS_HOST}}
+      DATABRICKS_CLIENT_ID: ${{vars.DATABRICKS_CLIENT_ID}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
