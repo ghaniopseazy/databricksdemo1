@@ -43,7 +43,7 @@ jobs:
     needs:
       - validate
     runs-on: ubuntu-latest
-    envioronment: dev
+    environment: dev
     env:
       DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: ${{vars.DATABRICKS_HOST}}
