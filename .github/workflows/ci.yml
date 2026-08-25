@@ -49,6 +49,8 @@ jobs:
       DATABRICKS_HOST: ${{vars.DATABRICKS_HOST}}
       DATABRICKS_CLIENT_ID: ${{vars.DATABRICKS_CLIENT_ID}}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
       - name: Deploy to dev
