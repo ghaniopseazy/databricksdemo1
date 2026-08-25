@@ -56,5 +56,23 @@ jobs:
       - name: Deploy to dev
         run: |
           databricks bundle deploy --target dev
+    run-dev:
+    name: Run Lakeflow job
+    needs:
+      - deploy-dev
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{vars.DATABRICKS_HOST}}
+      DATABRICKS_CLIENT_ID: ${{vars.DATABRICKS_CLIENT_ID}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+      - name: Run Lakeflow job
+        run: |
+          databricks bundle run --target dev simple_retail_demo_job
 
   
