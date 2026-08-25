@@ -38,4 +38,21 @@ jobs:
       - name: Validate Databricks Bundle
         run: |
           databricks bundle validate -t dev
+  deploy-dev:
+    name: Deploy to dev
+    needs:
+      - validate
+    runs-on: ubuntu-latest
+    envioronment: dev
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{vars.DATABRICKS_HOST}}
+      DATABRICKS_CLIENT_ID: ${{vars.DATABRICKS_CLIENT_ID}}
+    steps:
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+      - name: Deploy to dev
+        run: |
+          databricks bundle deploy --target dev
+
   
