@@ -56,7 +56,7 @@ jobs:
       - name: Deploy to dev
         run: |
           databricks bundle deploy --target dev
-    run-dev:
+  run-dev:
     name: Run Lakeflow job
     needs:
       - deploy-dev
