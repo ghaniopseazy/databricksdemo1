@@ -1,4 +1,4 @@
-name: Databricks CI-CD
+name: Databricks Ci-cd
 
 on:
   push:
@@ -38,3 +38,4 @@ jobs:
       - name: Validate Databricks Bundle
         run: |
           databricks bundle validate -t dev
+  
